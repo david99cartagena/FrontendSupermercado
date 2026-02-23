@@ -1,0 +1,32 @@
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <div class="card shadow mt-5">
+      <div class="card-header bg-dark text-white text-center">
+        <h4>Login</h4>
+      </div>
+      <div class="card-body">
+        
+        <form [formGroup]="form">
+          <div class="mb-3">
+            <label>Email</label>
+            <input class="form-control" formControlName="email" />
+          </div>
+          <div class="mb-3">
+            <label>Password</label>
+            <input type="password" class="form-control" formControlName="password" />
+          </div>
+          <button class="btn btn-success w-100" (click)="login()">
+            Entrar
+          </button>
+        </form>
+        
+        <hr />
+        <div class="text-center">
+          <a routerLink="/usuarios/crear" class="btn btn-primary">
+            Crear Usuario
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

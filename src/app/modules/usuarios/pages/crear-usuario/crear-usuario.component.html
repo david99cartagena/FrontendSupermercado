@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card shadow">
+        <div class="card-header bg-dark text-white text-center">
+          <h4>Crear Usuario</h4>
+        </div>
+
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="guardar()">
+            <!-- Nombre -->
+            <div class="mb-3">
+              <label class="form-label"> Nombre </label>
+              <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese nombre" />
+            </div>
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="form-label"> Email </label>
+              <input type="email" class="form-control" formControlName="email" placeholder="correo@email.com" />
+            </div>
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="form-label"> Password </label>
+              <input type="password" class="form-control" formControlName="password" placeholder="********" />
+            </div>
+            <!-- Botones -->
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-success">
+                Guardar Usuario
+              </button>
+              <button routerLink="/usuarios/login" type="button" class="btn btn-secondary">
+                Volver al Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

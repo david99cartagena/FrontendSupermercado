@@ -1,0 +1,89 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header">Usuarios</div>
+
+    <div class="card-body">
+      <form [formGroup]="formBuscar">
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <input
+              class="form-control"
+              placeholder="Buscar ID"
+              formControlName="id"
+            />
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-primary" (click)="buscar()">Buscar</button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-secondary" (click)="cargar()">Todos</button>
+          </div>
+        </div>
+      </form>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let u of usuarios">
+            <td>{{ u.id }}</td>
+            <td>{{ u.nombre }}</td>
+            <td>{{ u.email }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm me-1" (click)="editar(u)">
+                Editar
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="eliminar(u.id!)">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalEditar">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Editar Usuario</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="formEditar">
+          <div class="mb-3">
+            <label>Nombre</label>
+            <input class="form-control" formControlName="nombre" />
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input class="form-control" formControlName="email" />
+          </div>
+          <div class="mb-3">
+            <label>Password</label>
+            <input type="password" class="form-control" formControlName="password" />
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button class="btn btn-success" (click)="guardarEdicion()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
