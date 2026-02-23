@@ -1,0 +1,82 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between mb-3">
+    <h3>Lista Clientes</h3>
+    <a routerLink="/clientes/crear" class="btn btn-primary"> Nuevo Cliente </a>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Cedula</th>
+        <th>Telefono</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let c of lista">
+        <td>{{ c.id }}</td>
+        <td>{{ c.nombre }}</td>
+        <td>{{ c.apellido }}</td>
+        <td>{{ c.identificacion }}</td>
+        <td>{{ c.telefono }}</td>
+        <td>
+        <button class="btn btn-sm btn-warning" (click)="abrirModal(c.identificacion)">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal Editar Cliente -->
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Editar Cliente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="formEditar">
+          <div class="mb-3">
+            <label>Identificación</label>
+            <input class="form-control" formControlName="identificacion" />
+          </div>
+          <div class="mb-3">
+            <label>Nombre</label>
+            <input class="form-control" formControlName="nombre" />
+          </div>
+          <div class="mb-3">
+            <label>Apellido</label>
+            <input class="form-control" formControlName="apellido" />
+          </div>
+          <div class="mb-3">
+            <label>Dirección</label>
+            <input class="form-control" formControlName="direccion" />
+          </div>
+          <div class="mb-3">
+            <label>Teléfono</label>
+            <input class="form-control" formControlName="telefono" />
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input class="form-control" formControlName="email" />
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-success" (click)="guardarEdicion()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
