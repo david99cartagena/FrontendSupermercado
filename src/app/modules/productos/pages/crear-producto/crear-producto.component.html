@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">Crear Producto</div>
+        <form [formGroup]="form">
+          <div class="mb-3">
+            <label>Código</label>
+            <input class="form-control" formControlName="codigoProducto" />
+          </div>
+          <div class="mb-3">
+            <label>Nombre</label>
+            <input class="form-control" formControlName="nombreProducto" />
+          </div>
+          <div class="mb-3">
+            <label>Precio</label>
+            <input type="number" class="form-control" formControlName="valorUnitario" />
+          </div>
+          <div class="mb-3">
+            <label>Stock</label>
+            <input type="number" class="form-control" formControlName="unidadesDisponibles" />
+          </div>
+
+          <button class="btn btn-success me-2" type="button" (click)="guardar()">Guardar</button>
+          <button routerLink="/productos" class="btn btn-secondary">Volver</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

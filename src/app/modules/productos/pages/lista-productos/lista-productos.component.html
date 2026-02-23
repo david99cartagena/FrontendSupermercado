@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between mb-3">
+    <h3>Lista Productos</h3>
+    <a routerLink="/productos/crear" class="btn btn-primary">Nuevo Producto</a>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of lista">
+        <td>{{ p.id }}</td>
+        <td>{{ p.codigoProducto }}</td>
+        <td>{{ p.nombreProducto }}</td>
+        <td>{{ p.valorUnitario | currency }}</td>
+        <td>{{ p.unidadesDisponibles }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" (click)="abrirModal(p.id)">Editar</button>
+          <button class="btn btn-sm btn-danger" (click)="eliminarProducto(p.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal Editar Producto -->
+<div class="modal fade" id="modalEditarProducto" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Editar Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEditar">
+          <div class="mb-3">
+            <label>Código</label>
+            <input class="form-control" formControlName="codigoProducto" />
+          </div>
+          <div class="mb-3">
+            <label>Nombre</label>
+            <input class="form-control" formControlName="nombreProducto" />
+          </div>
+          <div class="mb-3">
+            <label>Precio</label>
+            <input type="number" class="form-control" formControlName="valorUnitario" />
+          </div>
+          <div class="mb-3">
+            <label>Stock</label>
+            <input type="number" class="form-control" formControlName="unidadesDisponibles" />
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" (click)="guardarEdicion()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
