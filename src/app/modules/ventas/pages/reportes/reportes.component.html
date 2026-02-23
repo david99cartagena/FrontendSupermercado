@@ -1,0 +1,61 @@
+<!-- Botón para abrir modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportesModal">
+  Reportes
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="reportesModal" tabindex="-1" aria-labelledby="reportesModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="formReporte" (ngSubmit)="generarReporte()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reportesModalLabel">Generar Reporte</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Seleccionar tipo de reporte -->
+          <div class="mb-3">
+            <label>Tipo de reporte</label>
+            <select formControlName="tipo" class="form-control" (change)="onTipoReporteChange()">
+              <option value="" disabled selected>Seleccione un tipo</option>
+              <option value="diario">Diario</option>
+              <option value="semanal">Semanal</option>
+              <option value="mensual">Mensual</option>
+              <option value="anual">Anual</option>
+            </select>
+          </div>
+
+          <!-- Inputs dinámicos según tipo -->
+          <div *ngIf="tipoReporte === 'diario'" class="mb-3">
+            <label>Fecha</label>
+            <input type="date" formControlName="fecha" class="form-control" />
+          </div>
+
+          <div *ngIf="tipoReporte === 'semanal'" class="mb-3">
+            <label>Fecha Inicio</label>
+            <input type="date" formControlName="fechaInicio" class="form-control" />
+            <label>Fecha Fin</label>
+            <input type="date" formControlName="fechaFin" class="form-control" />
+          </div>
+
+          <div *ngIf="tipoReporte === 'mensual'" class="mb-3">
+            <label>Año</label>
+            <input type="number" formControlName="anio" class="form-control" min="2000" max="2100" />
+            <label>Mes</label>
+            <input type="number" formControlName="mes" class="form-control" min="1" max="12" />
+          </div>
+
+          <div *ngIf="tipoReporte === 'anual'" class="mb-3">
+            <label>Año</label>
+            <input type="number" formControlName="anio" class="form-control" min="2000" max="2100" />
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Generar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

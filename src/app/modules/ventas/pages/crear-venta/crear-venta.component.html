@@ -1,0 +1,77 @@
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <!-- Seleccionar Cliente -->
+  <div class="mb-3">
+    <label>Cliente</label>
+    <select formControlName="clienteId" class="form-control">
+      <option value="" disabled selected>Seleccione un cliente</option>
+      <option *ngFor="let c of clientes" [value]="c.id">{{ c.nombre }}</option>
+    </select>
+  </div>
+
+  <!-- Seleccionar Usuario -->
+  <div class="mb-3">
+    <label>Usuario</label>
+    <select formControlName="usuarioId" class="form-control">
+      <option value="" disabled selected>Seleccione un usuario</option>
+      <option *ngFor="let u of usuarios" [value]="u.id">{{ u.nombre }}</option>
+    </select>
+  </div>
+
+  <!-- Productos (carrito) -->
+  <!-- <div formArrayName="detalles">
+    <div *ngFor="let detalle of detalles.controls; let i = index" [formGroupName]="i" class="mb-3 border p-2">
+      
+      <label>Producto</label>
+      <select formControlName="productoId" class="form-control">
+        <option value="" disabled selected>Seleccione un producto</option>
+        <option *ngFor="let p of productos" [value]="p.id">
+          {{ p.nombreProducto }} - ${{ p.valorUnitario }} (Stock: {{ p.unidadesDisponibles }})
+        </option>
+      </select>
+
+      <label>Cantidad</label>
+      <input formControlName="cantidad" class="form-control" type="number" min="1" />
+
+      <button type="button" class="btn btn-danger mt-2" (click)="eliminarDetalle(i)">Eliminar</button>
+    </div>
+  </div> -->
+
+  <div style="max-height: 300px; overflow-y: auto" formArrayName="detalles">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detalle of detalles.controls; let i = index" [formGroupName]="i">
+          <td>
+            <select formControlName="productoId" class="form-control">
+              <option value="" disabled>Seleccione un producto</option>
+              <option *ngFor="let p of productos" [value]="p.id">
+                {{ p.nombreProducto }} - ${{ p.valorUnitario }} (Stock:
+                {{ p.unidadesDisponibles }})
+              </option>
+            </select>
+          </td>
+          <td>
+            <input formControlName="cantidad" type="number" class="form-control" min="1" />
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="eliminarDetalle(i)">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button type="button" class="btn btn-secondary me-2" (click)="agregarDetalle()">
+    Agregar Producto
+  </button>
+  <button type="submit" class="btn btn-success me-4">Crear Venta</button>
+  <app-reportes></app-reportes>
+</form>
